@@ -20,10 +20,12 @@ namespace MagicVilla_VillaAPI.Controllers
     {
         protected APIResponse _response;
         public readonly IVillaNumberRepository _dbVillaNumber;
+        public readonly IVillaRepository _dbVilla;
         public readonly IMapper _mapper;
 
-        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, IMapper mapper)
+        public VillaNumberAPIController(IVillaNumberRepository dbVillaNumber, IVillaRepository dbVilla,IMapper mapper)
         {
+            _dbVilla = dbVilla;
             _dbVillaNumber = dbVillaNumber;
             _mapper = mapper;
             this._response = new();
@@ -93,10 +95,14 @@ namespace MagicVilla_VillaAPI.Controllers
             {
                 if (await _dbVillaNumber.GetAsync(u => u.VillaNo == createDTO.VillaNo) != null)
                 {
-                    ModelState.AddModelError("CustomeError", "Villa Number already Exist!");
+                    ModelState.AddModelError("CustomError", "Villa Number already Exist!");
                     return BadRequest(ModelState); 
                 }
-
+                if(await _dbVilla.GetAsync(u => u.Id == createDTO.VillaID) == null)
+                {
+                    ModelState.AddModelError("CustomError", "Villa ID already Exist!");
+                    return BadRequest(ModelState);
+                }
                 if (createDTO == null)
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
@@ -172,7 +178,11 @@ namespace MagicVilla_VillaAPI.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-
+                if (await _dbVilla.GetAsync(u => u.Id == updateDTO.VillaID) == null)
+                {
+                    ModelState.AddModelError("CustomError", "Villa ID already Exist!");
+                    return BadRequest(ModelState);
+                }
                 if (await _dbVillaNumber.GetAsync(u => u.VillaNo == villaNo, tracked: false) == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
