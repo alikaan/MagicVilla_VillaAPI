@@ -12,9 +12,14 @@
     <None Remove="Models\Dto\" />
     <None Remove="AutoMapper" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="Services\" />
+    <None Remove="Services\IServices\" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Dto\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\IServices\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MagicVilla_Utility\MagicVilla_Utility.csproj">
@@ -24,5 +29,6 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 </Project>
