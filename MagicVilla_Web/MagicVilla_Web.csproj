@@ -15,11 +15,13 @@
     <None Remove="Services\" />
     <None Remove="Services\IServices\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Views\Villa\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Dto\" />
     <Folder Include="Services\" />
     <Folder Include="Services\IServices\" />
+    <Folder Include="Views\Villa\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MagicVilla_Utility\MagicVilla_Utility.csproj">
