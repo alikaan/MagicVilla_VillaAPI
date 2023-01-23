@@ -182,7 +182,7 @@ namespace MagicVilla_VillaAPI.Controllers
                     _response.IsSuccess = false;
                     return BadRequest(_response);
                 }
-                if(await _dbVilla.GetAsync(u => u.Id == id) == null)
+                if(await _dbVilla.GetAsync(u => u.Id == id, tracked: false) == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     _response.IsSuccess = false;
