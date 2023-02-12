@@ -3,9 +3,8 @@ namespace MagicVilla_VillaAPI.Models.Dto
 {
 	public class LoginResponseDTO
 	{
-		public LoginResponseDTO()
-		{
-		}
+		public LocalUser User { get; set; }
+		public string Token { get; set; }
 	}
 }
 
