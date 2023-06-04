@@ -21,7 +21,7 @@ namespace MagicVilla_VillaAPI.Repository
         {
             entity.UpdatedDate = DateTime.UtcNow;
             _db.Villas.Update(entity);
-            await _db.SaveChangesAsync ();
+            await _db.SaveChangesAsync();
             return entity;
         }
     }
