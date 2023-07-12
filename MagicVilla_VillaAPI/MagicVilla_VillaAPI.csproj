@@ -50,6 +50,8 @@
     <None Remove="System.IdentityModel.Tokens.Jwt" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="Migrations\" />
+    <None Remove="Controllers\v2\" />
+    <None Remove="Controllers\v1\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -60,5 +62,8 @@
     <Folder Include="Repository\" />
     <Folder Include="Repository\IRepository\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Controllers\v2\" />
+    <Folder Include="Controllers\v2\" />
+    <Folder Include="Controllers\v1\" />
   </ItemGroup>
 </Project>

@@ -13,13 +13,12 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
     //[Route("api/[controller]")]
     [Route("api/v{version:apiVersion}/VillaNumberAPI")]
 	[ApiController]
     [ApiVersion("1.0")]
-    [ApiVersion("2.0")]
     public class VillaNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -35,9 +34,13 @@ namespace MagicVilla_VillaAPI.Controllers
             this._response = new();
         }
 
+        [HttpGet("GetString")]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "Ali Kaan", "Ceku" };
+        }
 
         [HttpGet]
-        [MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetVillaNumbers()
         {
@@ -54,13 +57,6 @@ namespace MagicVilla_VillaAPI.Controllers
                 _response.ErrorMessages.Add(ex.ToString());
             }
             return _response;
-        }
-
-        [HttpGet]
-        [MapToApiVersion("2.0")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
         }
 
         [HttpGet("{villaNo:int}", Name = "GetVillaNumber")]
