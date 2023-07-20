@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿ using System.Text;
 using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Logging;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultPSQLConnection"));
 });
+builder.Services.AddResponseCaching(); 
 var key = builder.Configuration.GetValue<string>("Apisettings:Secret");
 
 builder.Services.AddAuthentication(x =>
@@ -61,6 +63,16 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddControllers(option =>
 {
+    option.CacheProfiles.Add("Default30",
+        new  CacheProfile()
+        {
+            Duration = 30
+        });
+    option.CacheProfiles.Add("Default60",
+        new CacheProfile()
+        {
+            Duration = 60
+        });
     // option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
